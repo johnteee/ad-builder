@@ -56,6 +56,9 @@
     }
   },
   "dependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "axios": "^0.18.0",
     "uglify-js": "^3.5.4",
     "vue": "^2.5.16",

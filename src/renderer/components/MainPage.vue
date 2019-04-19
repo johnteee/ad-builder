@@ -46,9 +46,9 @@
       open (link) {
         this.$electron.shell.openExternal(link)
       },
-      compressCode () {
+      async compressCode () {
         try {
-          this.compressedCode = CompressUtils.compressCode(this.sourceCode)
+          this.compressedCode = await CompressUtils.compressCode(this.sourceCode)
         } catch (e) {
           console.trace(e)
         }

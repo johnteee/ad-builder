@@ -1,13 +1,22 @@
+import * as babel from '@babel/core'
 const UglifyJS = require('uglify-js')
 
 export default {
   compressCode: function (code) {
-    let result = UglifyJS.minify(code)
-    // console.trace(result.error); // runtime error, or `undefined` if no error
-    // console.trace(result.code);  // minified output: function add(n,d){return n+d}
-    if (result && (!result.error)) {
-      return result.code
-    }
-    throw result.error
+    return new Promise(function (resolve, reject) {
+      babel.transform(code, {}, function (err, result) {
+        if (err) {
+          reject(err)
+        } else {
+          let minified = UglifyJS.minify(result.code)
+          // console.trace(minified.error); // runtime error, or `undefined` if no error
+          // console.trace(minified.code);  // minified output: function add(n,d){return n+d}
+          if (minified && (!minified.error)) {
+            resolve(minified.code)
+          }
+          reject(minified.error)
+        }
+      })
+    })
   }
 }
