@@ -9,6 +9,10 @@ if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
+const isNotProduction = process.env.NODE_ENV !== 'production'
+Vue.config.devtools = isNotProduction
+Vue.config.performance = isNotProduction
+
 /* eslint-disable no-new */
 new Vue({
   components: { App },
